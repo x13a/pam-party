@@ -1,7 +1,7 @@
 # pam-party
 
 PAM module. The idea was to have "secret" password that can be used to
-bypass authentication and run arbitary command before unlock. For little
+bypass authentication and run some command before unlock. For little
 security salt is prepanded and the result token is hashed with sha256.
 
 This module requires pam and openssl libraries to build.
