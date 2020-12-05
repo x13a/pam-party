@@ -4,7 +4,7 @@ PAM module. The idea was to have "secret" password that can be used to
 bypass authentication and run some command before unlock. For little
 security salt is prepanded and the result token is hashed with sha256.
 
-This module requires pam and openssl libraries to build.
+This module requires pam and openssl libraries to compile.
 
 ## Security
 
