@@ -1,22 +1,26 @@
-NAME      := pam_party
+NAME        := pam_party
 
-srcdir    ?= ./src
+prefix      ?= /usr/local
+exec_prefix ?= $(prefix)
+srcdir      ?= ./src
+libdir      ?= $(exec_prefix)/lib
 
-fname     := $(NAME).so
-targetdir := ./target
-target    := $(targetdir)/$(fname)
-destdir   := $(DESTDIR)/lib/security
+fname       := $(NAME).so
+targetdir   := ./target
+target      := $(targetdir)/$(fname)
+destdir     := $(DESTDIR)$(libdir)/security
 
 all: build
 
 build:
-	gcc $(srcdir)/* -lpam -lcrypto -shared -o $(target)
+	mkdir -p $(targetdir)
+	gcc $(srcdir)/* -lpam -largon2 -shared -o $(target)
 
 installdirs:
-	install -o root -g root -d $(destdir)/
+	install -d $(destdir)/
 
 install: installdirs
-	install -m 0644 -o root -g root $(target) $(destdir)/
+	install -m 0644 $(target) $(destdir)/
 
 uninstall:
 	rm -f $(destdir)/$(fname)
