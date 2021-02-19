@@ -37,13 +37,13 @@ $ sed -ie 's/_ARGON2ID_HASH_/YOUR_HASH/' ./src/pam_party.c
 Now build and install.
 
 After that you have to modify pam.d config files. Add to the beginning of 
-screen lock configuration file and change <USER> to your username:
+screen lock configuration file and change `USER` to your username:
 ```text
 auth  sufficient  /usr/local/lib/security/pam_party.so  /usr/bin/mkdir -p /home/<USER>/Desktop/pam_party_test_dir
 ```
 
 Now you can unlock using your "secret" credits. One more thing is that 
-<your-command> should exit success or PAM_IGNORE will be returned.
+`your-command` should exit success or PAM_IGNORE will be returned.
 
 ## Friends
 - [pam_panic](https://github.com/pampanic/pam_panic)
