@@ -4,9 +4,7 @@ PAM module. If bad guys will force you to unlock, you can use this
 module to run some command before unlock using "secret" credits.
 
 The difference with using pam_exec is that all authentication is done 
-internally and authtok is not exposed.
-
-Requires pam and argon2 dev libraries to compile.
+internally and `authtok` is not exposed.
 
 ## Installation
 ```sh
@@ -20,18 +18,13 @@ First, before build, you must modify some vars.
 
 You have to change user (empty it if you do not need to check user):
 ```sh
-$ sed -ie 's/_USER_/YOUR_USER/' ./src/pam_party.c
-```
-
-Now you have to change salt (min 8):
-```sh
-$ sed -ie 's/_SALT_/YOUR_SALT/' ./src/pam_party.c
+$ sed -ie 's/_USER_/YOUR_USER/' ./src/lib.rs
 ```
 
 And you have to generate hash:
 ```sh
 $ echo -n "YOUR_PASSWORD" | argon2 "YOUR_SALT" -id -t 1 -m 16 -p 4
-$ sed -ie 's/_ARGON2ID_HASH_/YOUR_HASH/' ./src/pam_party.c
+$ sed -ie 's/_HASH_/YOUR_ENCODED_HASH/' ./src/lib.rs
 ```
 
 Now build and install.

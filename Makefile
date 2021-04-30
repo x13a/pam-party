@@ -2,28 +2,24 @@ NAME        := pam_party
 
 prefix      ?= /usr/local
 exec_prefix ?= $(prefix)
-srcdir      ?= ./src
 libdir      ?= $(exec_prefix)/lib
 
 fname       := $(NAME).so
-targetdir   := ./target
-target      := $(targetdir)/$(fname)
 destdir     := $(DESTDIR)$(libdir)/security
 
 all: build
 
 build:
-	mkdir -p $(targetdir)
-	gcc $(srcdir)/* -lpam -largon2 -shared -o $(target)
+	cargo build --locked --release --lib
 
 installdirs:
 	install -d $(destdir)/
 
 install: installdirs
-	install -m 0644 $(target) $(destdir)/
+	install -m 0644 ./target/release/lib$(fname) $(destdir)/$(fname)
 
 uninstall:
 	rm -f $(destdir)/$(fname)
 
 clean:
-	rm -rf $(targetdir)/
+	cargo clean
