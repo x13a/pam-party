@@ -16,7 +16,7 @@ installdirs:
 	install -d $(destdir)/
 
 install: installdirs
-	install -m 0644 ./target/release/lib$(fname) $(destdir)/$(fname)
+	install -m 0640 ./target/release/lib$(fname) $(destdir)/$(fname)
 
 uninstall:
 	rm -f $(destdir)/$(fname)
