@@ -6,20 +6,22 @@ libdir      ?= $(exec_prefix)/lib
 
 fname       := $(NAME).so
 destdir     := $(DESTDIR)$(libdir)/security
+targetdir   := ./zig-out
 
 all: build
 
 build:
-	cargo build --locked --release --lib
+	zig build
 
 installdirs:
 	install -d $(destdir)/
 
 install: installdirs
-	install -m 0640 ./target/release/lib$(fname) $(destdir)/$(fname)
+	install -m 0600 $(targetdir)/lib/lib$(fname) $(destdir)/$(fname)
 
 uninstall:
 	rm -f $(destdir)/$(fname)
 
 clean:
-	cargo clean
+	rm -rf ./zig-cache/
+	rm -rf $(targetdir)/
